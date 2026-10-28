@@ -22,4 +22,4 @@ TP3_Sola/
 
 - **Nama lengkap:** Sola Gratia Hutasoit
 - **NIM:** [253303621286]
-- **Link Google Docs (Bagian D):** [https://docs.google.com/document/d/1xs0x4kYOwM1PLqvYKu5NX8363OZEmkpKEZ5AvmxM_fQ/edit?tab=t.0]
+- **Link Google Docs (Bagian D):** [https://docs.google.com/document/d/1CUKjynZZqhZyW8d0D3qhMEGxTxrDEeymYLPiXgj2B3U/edit?tab=t.0]
