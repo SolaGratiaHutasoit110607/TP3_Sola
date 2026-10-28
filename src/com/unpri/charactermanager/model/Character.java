@@ -7,22 +7,23 @@ package com.unpri.charactermanager.model;
  */
 public class Character {
 
-    // ===== ATRIBUT (private — tidak bisa diakses langsung dari luar class) =====
+    // ===== ATRIBUT (private - tidak bisa diakses langsung dari luar class) =====
     private int id;
     private String name;
     private CharacterType type;
     private int level;
     private int hitPoints;
     private int attackPower;
+    private int mana;
 
     // ===== CONSTRUCTOR 1: untuk membuat karakter BARU =====
     // Dipakai saat user membuat karakter dari form (belum punya id dari database)
     public Character(String name, CharacterType type, int level) {
-        this.name = name;              // "this" merujuk ke atribut milik object ini
+        this.name = name;
         this.type = type;
         this.level = level;
-        this.hitPoints = calculateBaseHP();      // HP dihitung otomatis dari level
-        this.attackPower = calculateBaseAttack(); // Attack dihitung otomatis dari level
+        this.hitPoints = calculateBaseHP();
+        this.attackPower = calculateBaseAttack();
     }
 
     // ===== CONSTRUCTOR 2: untuk MEMUAT karakter dari database =====
@@ -38,36 +39,77 @@ public class Character {
 
     // ===== HELPER PRIVATE: hanya dipakai internal class ini =====
     private int calculateBaseHP() {
-        return 100 + (level * 10);   // contoh: level 5 → HP = 150
+        return 100 + (level * 10);   // contoh: level 5 -> HP = 150
     }
 
     private int calculateBaseAttack() {
-        return 10 + (level * 5);     // contoh: level 5 → Attack = 35
+        return 10 + (level * 5);     // contoh: level 5 -> Attack = 35
     }
 
-    // ===== GETTER: cara AMAN membaca nilai atribut private dari luar =====
+    // ===== GETTER =====
     public int getId() { return id; }
     public String getName() { return name; }
     public CharacterType getType() { return type; }
     public int getLevel() { return level; }
     public int getHitPoints() { return hitPoints; }
     public int getAttackPower() { return attackPower; }
+    public int getMana() { return mana; }
 
-    // ===== SETTER: cara AMAN mengubah atribut, dengan VALIDASI =====
+    // ===== SETTER (dengan VALIDASI) =====
     public void setId(int id) {
         this.id = id;
     }
 
+    public void setName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Nama tidak boleh kosong");
+        }
+        this.name = name;
+    }
+
+    public void setType(CharacterType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Tipe karakter tidak boleh null");
+        }
+        this.type = type;
+    }
+
     public void setLevel(int level) {
-        if (level < 1) {                       // validasi: level tidak boleh kurang dari 1
+        if (level < 1) {
             throw new IllegalArgumentException("Level minimal adalah 1");
         }
         this.level = level;
-        this.hitPoints = calculateBaseHP();      // statistik dihitung ULANG setiap level berubah
+        this.hitPoints = calculateBaseHP();       // statistik dihitung ULANG setiap level berubah
         this.attackPower = calculateBaseAttack();
     }
 
-    // ===== toString(): representasi teks object, berguna untuk debugging =====
+    public void setHitPoints(int hitPoints) {
+        if (hitPoints < 0) {
+            throw new IllegalArgumentException("Hit points tidak boleh negatif");
+        }
+        this.hitPoints = hitPoints;
+    }
+
+    public void setAttackPower(int attackPower) {
+        if (attackPower < 0) {
+            throw new IllegalArgumentException("Attack power tidak boleh negatif");
+        }
+        this.attackPower = attackPower;
+    }
+
+    public void setMana(int mana) {
+        if (mana < 0) {
+            throw new IllegalArgumentException("Mana tidak boleh negatif");
+        }
+        this.mana = mana;
+    }
+
+    // ===== METHOD BARU (Bagian B) =====
+    public boolean isAlive() {
+        return hitPoints > 0;
+    }
+
+    // ===== toString(): representasi teks object =====
     @Override
     public String toString() {
         return "Character{id=" + id +
@@ -75,6 +117,7 @@ public class Character {
                ", type=" + type +
                ", level=" + level +
                ", hp=" + hitPoints +
-               ", atk=" + attackPower + '}';
+               ", atk=" + attackPower +
+               ", mana=" + mana + '}';
     }
 }
