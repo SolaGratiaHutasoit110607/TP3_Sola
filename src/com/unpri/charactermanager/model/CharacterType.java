@@ -1,12 +1,17 @@
+
 package com.unpri.charactermanager.model;
 
 /**
- * Enum yang mendefinisikan jenis-jenis karakter dalam aplikasi.
- * Menggunakan enum (bukan String) agar nilai selalu valid & type-safe.
+ * Enum yang mendefinisikan jenis karakter.
+ *
+ * Menggunakan enum agar tipe karakter hanya dapat
+ * menggunakan nilai yang telah ditentukan.
  */
 public enum CharacterType {
-    WARRIOR,    // karakter pejuang
-    MAGE,       // karakter penyihir
-    ARCHER,     // karakter pemanah
-    HEALER      // karakter penyembuh
+
+    WARRIOR,
+    MAGE,
+    ARCHER,
+    HEALER
+
 }
